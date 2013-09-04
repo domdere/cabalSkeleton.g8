@@ -3,7 +3,7 @@
 *.o
 *.hi
 
-# files we just genreally ont want in the repo
+# files we just generally dont want in the repo
 *.swp
 *.log
 
@@ -13,5 +13,8 @@
 # potential build files:
 data/
 
-#cabal build directory:
+# cabal build directory:
 dist/
+
+# the test out dir when testing the g8 templates locally
+target/

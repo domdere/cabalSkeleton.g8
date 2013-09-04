@@ -22,12 +22,12 @@ sourceDirs :: [FilePath]
 sourceDirs = ["src"]
 
 main :: IO ()
-main = getSources >>= \sources -> doctest $ opts ++ sources
+main = getSources >>= \sources -> doctest \$ opts ++ sources
 
 getFilesAndDirectories :: FilePath -> IO ([FilePath], [FilePath])
 getFilesAndDirectories dir = do
-    c <- map (dir </>) . filter (`notElem` ["..", "."]) <$> getDirectoryContents dir
-    (,) <$> filterM doesDirectoryExist c <*> filterM doesFileExist c
+    c <- map (dir </>) . filter (`notElem` ["..", "."]) <\$> getDirectoryContents dir
+    (,) <\$> filterM doesDirectoryExist c <*> filterM doesFileExist c
 
 isSourceFile :: FilePath -> Bool
 isSourceFile p = and [takeFileName p /= "Setup.hs", isSuffixOf ".hs" p]
@@ -37,4 +37,4 @@ getSources = liftM (filter isSourceFile . concat) (mapM go sourceDirs)
     where
         go dir = do
             (dirs, files) <- getFilesAndDirectories dir
-            (files ++) . concat <$> mapM go dirs
+            (files ++) . concat <\$> mapM go dirs

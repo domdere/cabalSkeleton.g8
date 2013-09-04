@@ -7,9 +7,9 @@ maintainer:         $maintainer$
 copyright:          Copyright (C) 2010-2013 
 synopsis:           $synopsis$
 category:           $category$
-description:        $description$
-homepage:           https://github.com/domdere/cabalSkeleton
-bug-reports:        https://github.com/domdere/cabalSkeleton
+description:        $cabal_description$
+homepage:           $homepage$
+bug-reports:        $homepage$
 cabal-version:      >= $cabal_version$
 build-type:         Custom
 --extra-source-files: etc/CONTRIBUTORS,

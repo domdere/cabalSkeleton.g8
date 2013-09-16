@@ -60,7 +60,7 @@ executable              $executable_name$
     -- other-modules:
 
     -- Other library packages from which modules are imported.
-    build-depends:      base < 5 && >= 4
+    build-depends:      base < 5 && >= 4,
                         $name;format="camel"$
 
 test-suite              doctests

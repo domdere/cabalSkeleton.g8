@@ -29,6 +29,9 @@ See `cabal build --help` for more build options.
 Unit tests are written with [**doctest**] [doctest-github], for instructions on how to add unit tests 
 see the **doctest** [**User Guide**] [doctest-userguide].
 
+Currently only files in the `src/` directory are searched for tests, it is assumed that the code in `main/`
+is a thin layer of code that uses modules from `src/`
+
 [doctest-github]: https://github.com/sol/doctest-haskell "sol/doctest-haskell on GitHub.com"
 [doctest-userguide]: https://github.com/sol/doctest-haskell/blob/master/README.markdown#usage "doctest Usage Guide"
 

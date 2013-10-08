@@ -14,9 +14,9 @@ But for **UNIX**y systems the following will suffice:
 
     curl https://raw.github.com/n8han/conscript/master/setup.sh | sh
     ~/bin/cs n8han/giter8
-    g8
+    ~/bin/g8
 
-This will install `cs` and `g8` in `~/bin`
+This will install `cs` and `g8` in `~/bin`.  It would be worthwhile adding `~/bin` to your `PATH`.
 
 ## Using Giter8
 

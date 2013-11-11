@@ -12,6 +12,8 @@
 
 # potential build files:
 data/
+cabal-dev/
+*.buildinfo
 
 #cabal build directory:
 dist/

@@ -4,7 +4,7 @@ $cabal_description$
 
 ## Building the project
 
-The project must be "configured" at least once everytime `$name;format="camel"$.cabal` changes, this can be done with:
+The project must be "configured" at least once everytime `$name;format="norm"$.cabal` changes, this can be done with:
 
     cabal configure
 

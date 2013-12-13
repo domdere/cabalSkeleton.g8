@@ -1,7 +1,7 @@
-name:               $name;format="camel"$
+name:               $name;format="norm"$
 version:            0.0.1
 license:            $license_type$
-license-file:       etc/LICENCE
+license-file:       etc/LICENCE.md
 author:             $author_name$
 maintainer:         $maintainer$
 copyright:          Copyright (C) 2010-2013
@@ -61,7 +61,7 @@ executable              $executable_name$
 
     -- Other library packages from which modules are imported.
     build-depends:      base < 5 && >= 4,
-                        $name;format="camel"$
+                        $name;format="norm"$
 
 test-suite              doctests
     type:

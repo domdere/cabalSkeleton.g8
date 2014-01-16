@@ -10,8 +10,7 @@ import Test.DocTest
 
 doctestOpts :: [FilePath]
 doctestOpts =
-    [   "-isrc"
-    ,   "-idist/build/autogen"
+    [   "-isrc:dist/build/autogen"
     ,   "-optP-include"
     ,   "-optPdist/build/autogen/cabal_macros.h"
     ,   "-hide-all-packages"

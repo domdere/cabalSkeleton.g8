@@ -27,8 +27,8 @@ cabal-dev configure --disable-tests
 INTDOCDIR=`mktemp -d -t pages.XXXXXX`
 PUBDOCDIR=`mktemp -d -t pages.XXXXXX`
 
-cabal-dev haddock --internal --haddock-options=-o$INTDOCDIR
-cabal-dev haddock --haddock-options=-o$PUBDOCDIR
+cabal-dev haddock --hyperlink-source --internal --haddock-options=-o$INTDOCDIR
+cabal-dev haddock --hyperlink-source  --haddock-options=-o$PUBDOCDIR
 
 HEAD=`git rev-parse HEAD`
 

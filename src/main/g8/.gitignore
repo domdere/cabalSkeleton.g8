@@ -18,3 +18,7 @@ data/
 cabal-dev/
 sandbox/
 dist/
+
+# web artificats
+public/
+internal/

@@ -36,7 +36,7 @@ is a thin layer of code that uses modules from `src/`.
 
 Cabal's great, but its got its own warts, and when you are developing a few different projects with their own dependency chains, sometimes installing all your libraries to the same place causes problems,
 
-## Cabal version < 1.18
+### Cabal version < 1.18
 
 Consider trying [`cabal-dev`] [cabal-dev].  Install it with `cabal install cabal-dev`
 
@@ -44,7 +44,7 @@ In terms of using it, all thats required is replacing `cabal` with `cabal-dev` i
 
 It will download and install all the dependencies for your project and install them in a `cabal-dev/` directory in your project directory, and they will only be used for this project.
 
-## Cabal version >= 1.18
+### Cabal version >= 1.18
 
 Cabal version `1.18` and onwards supports sandboxes, which is basically the same idea as `cabal-dev`.
 

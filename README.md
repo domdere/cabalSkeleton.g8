@@ -26,9 +26,9 @@ This will install `cs` and `g8` in `~/bin`.  It would be worthwhile adding `~/bi
 
 This template can be downloaded with the command (assuming `~/bin` is added to your path):
 
-    g8 git://github.it.nicta.com.au/dre/cabalSkeleton.g8.git    
+    g8 git://github.it.nicta.com.au/dre/cabalSkeleton.g8.git
 
-[giter8]: https://github.com/n8han/giter8 "n8han/giter8 on github.com" 
+[giter8]: https://github.com/n8han/giter8 "n8han/giter8 on github.com"
 [giter8-install]: https://github.com/n8han/giter8/blob/master/README.markdown#installation "Installation instructions for Giter8"
 [doctest-github]: https://github.com/sol/doctest-haskell "sol/doctest on GitHub.com"
 [cabal-skeleton]: https://github.com/domdere/cabalSkeleton.g8 "domdere/cabalSkeleton.g8 on GitHub.com"

@@ -4,6 +4,20 @@ $cabal_description$
 
 ## Building the project
 
+Install the dependencies first with either:
+
+    cabal install --only-dependencies
+
+If you do not wish to build tests or benchmarks, or:
+
+    cabal install --only-dependencies --enable-tests
+
+If you want to be able to build the tests, or:
+
+    cabal install --only-dependencies --enable-benchmarks
+
+If you wish to build the benchmarks.
+
 The project must be "configured" at least once everytime `$name;format="norm"$.cabal` changes, this can be done with:
 
     cabal configure
@@ -11,6 +25,13 @@ The project must be "configured" at least once everytime `$name;format="norm"$.c
 If you wish to run the unit tests you will have to run:
 
     cabal configure --enable-tests
+
+If you wish to run benchmarks you will have to run:
+
+    cabal configure --enable-benchmarks
+
+At the moment there are issues with using both flags at the same time.  Its recommended that you use one flag at a time, use `cabal-dev` or `cabal sandbox` 
+(see below), and clear your sandbox when switching configurations from one to the other
 
 Then finally build it with:
 
@@ -31,6 +52,14 @@ see the **doctest** [**User Guide**] [doctest-userguide].
 
 Currently only files in the `src/` directory are searched for tests, it is assumed that the code in `main/`
 is a thin layer of code that uses modules from `src/`.
+
+## Running Benchmarks
+
+**After** running `cabal configure --enable-benchmarks` and `cabal build`, the following command will run the benchmarks:
+
+    cabal bench
+
+For newer versions of `cabal`, `cabal bench` will run a `cabal build` automatically if necessary..
 
 ## Development: Cabal Dependency Hell?
 

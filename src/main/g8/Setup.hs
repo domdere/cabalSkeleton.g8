@@ -3,15 +3,19 @@
 module Main (main) where
 
 import Data.List ( nub )
+import Data.Maybe ( fromMaybe )
 import Data.Version ( showVersion )
+import Data.Traversable ( sequenceA )
 import Control.Applicative
+import Control.Monad ( join )
 import Distribution.Package ( PackageName(PackageName), PackageId, InstalledPackageId, packageVersion, packageName )
 import Distribution.PackageDescription ( PackageDescription(), TestSuite(..) )
 import Distribution.Simple ( defaultMainWithHooks, UserHooks(..), simpleUserHooks )
+import Distribution.Simple.Compiler ( PackageDB(SpecificPackageDB) )
 import Distribution.Simple.Utils ( rewriteFile, createDirectoryIfMissingVerbose, findProgramVersion, currentDir )
 import Distribution.Simple.BuildPaths ( autogenModulesDir )
-import Distribution.Simple.Setup ( BuildFlags(buildVerbosity), fromFlag )
-import Distribution.Simple.LocalBuildInfo ( withLibLBI, withTestLBI, LocalBuildInfo(), ComponentLocalBuildInfo(componentPackageDeps) )
+import Distribution.Simple.Setup ( BuildFlags(buildVerbosity), configPackageDBs, fromFlag )
+import Distribution.Simple.LocalBuildInfo ( configFlags, withLibLBI, withTestLBI, LocalBuildInfo(), ComponentLocalBuildInfo(componentPackageDeps) )
 import Distribution.Verbosity ( Verbosity )
 import Distribution.Version ( Version )
 import System.Directory ( getDirectoryContents )
@@ -40,11 +44,20 @@ generateBuildModule verbosity pkg lbi = do
                 ,   "deps = " ++ show (formatdeps (testDeps libcfg suitecfg))
                 ,   "opts :: [String]"
                 ,   "opts = " ++ show ghcOpts
+                ,   "packageDBs :: [FilePath]"
+                ,   "packageDBs = " ++ show ((onlySpecificPackageDBs . configPackageDBs . configFlags) lbi)
                 ]
     where
         formatdeps = map (formatone . snd)
         formatone p = case packageName p of
             PackageName n -> n ++ "-" ++ showVersion (packageVersion p)
+
+onlySpecificPackageDB :: PackageDB -> Maybe FilePath
+onlySpecificPackageDB (SpecificPackageDB fp)    = Just fp
+onlySpecificPackageDB _                         = Nothing
+
+onlySpecificPackageDBs :: [Maybe PackageDB] -> [FilePath]
+onlySpecificPackageDBs = fromMaybe [] . sequenceA . fmap (join . fmap onlySpecificPackageDB)
 
 isCabalDevPresent :: IO Bool
 isCabalDevPresent = do

@@ -52,7 +52,7 @@ executable              $executable_name$
                         -fno-warn-unused-do-bind
                         -fno-warn-type-defaults
                         -- -i.:..
-                        -optl-Wl,-rpath,\$ORIGIN 
+                        -optl-Wl,-rpath,\$ORIGIN
     --extra-libraries:
     --extra-lib-dirs:
     -- Modules included in this executable, other than Main.
@@ -73,11 +73,12 @@ test-suite              doctests
                         Haskell2010
 
     build-depends:
-                        base < 5 && >= 3
-                    ,   doctest >= 0.9.7
-                    ,   filepath >= 1.3
-                    ,   directory >= 1.1
-                    ,   QuickCheck >= 2.0
+                        base                >= 3 && < 5
+                    ,   doctest             >= 0.9.11
+                    ,   filepath            >= 1.3
+                    ,   directory           >= 1.1
+                    ,   QuickCheck          >= 2.0
+                    ,   template-haskell    == 2.9.*
 
     ghc-options:
                         -Wall

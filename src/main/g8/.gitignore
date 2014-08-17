@@ -27,3 +27,6 @@ dist/
 # web artificats
 public/
 internal/
+
+# liquid artifacts
+.liquid/

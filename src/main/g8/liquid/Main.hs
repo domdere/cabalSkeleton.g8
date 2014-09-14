@@ -3,7 +3,7 @@ module Main where
 
 import Prelude ( Eq(..), Bool, String, (\$), (.), (&&) )
 
-import Build_liquid ( deps, packageDBs )
+import Build_liquid ( deps, specificPackageDBs )
 import Control.Applicative
 import Control.Monad
 import Data.List
@@ -21,10 +21,10 @@ consintersperse _ [] = []
 consintersperse x xs = x : (intersperse x xs)
 
 packageDBOpts :: [String]
-packageDBOpts = (consintersperse "-g" . consintersperse "-package-db") packageDBs
+packageDBOpts = (consintersperse "-g" . fmap ("-package-db=" ++)) specificPackageDBs
 
 packageOpts :: [String]
-packageOpts = (consintersperse "-g" . consintersperse "-package") deps
+packageOpts = (consintersperse "-g" . fmap ("-package=" ++)) deps
 
 extensionOpts :: [String]
 extensionOpts = (consintersperse "-g" . fmap ("-X" ++)) extensions

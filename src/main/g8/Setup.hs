@@ -3,15 +3,17 @@
 module Main (main) where
 
 import Data.List ( nub )
+import Data.Maybe ( catMaybes )
 import Data.Version ( showVersion )
 import Control.Applicative
 import Distribution.Package ( PackageName(PackageName), PackageId, InstalledPackageId, packageVersion, packageName )
 import Distribution.PackageDescription ( PackageDescription(), TestSuite(..) )
 import Distribution.Simple ( defaultMainWithHooks, UserHooks(..), simpleUserHooks )
+import Distribution.Simple.Compiler ( PackageDB(..), PackageDBStack )
 import Distribution.Simple.Utils ( rewriteFile, createDirectoryIfMissingVerbose, findProgramVersion, currentDir )
 import Distribution.Simple.BuildPaths ( autogenModulesDir )
 import Distribution.Simple.Setup ( BuildFlags(buildVerbosity), fromFlag )
-import Distribution.Simple.LocalBuildInfo ( withLibLBI, withTestLBI, LocalBuildInfo(), ComponentLocalBuildInfo(componentPackageDeps) )
+import Distribution.Simple.LocalBuildInfo ( withLibLBI, withPackageDB, withTestLBI, LocalBuildInfo(), ComponentLocalBuildInfo(componentPackageDeps) )
 import Distribution.Verbosity ( Verbosity )
 import Distribution.Version ( Version )
 import System.Directory ( getDirectoryContents )
@@ -40,11 +42,22 @@ generateBuildModule verbosity pkg lbi = do
                 ,   "deps = " ++ show (formatdeps (testDeps libcfg suitecfg))
                 ,   "opts :: [String]"
                 ,   "opts = " ++ show ghcOpts
+                ,   "specificPackageDBs :: [FilePath]"
+                ,   "specificPackageDBs = " ++ show (getSpecificDBs (withPackageDB lbi))
                 ]
     where
         formatdeps = map (formatone . snd)
         formatone p = case packageName p of
             PackageName n -> n ++ "-" ++ showVersion (packageVersion p)
+
+getFilePath :: PackageDB -> Maybe FilePath
+getFilePath GlobalPackageDB         = Nothing
+getFilePath UserPackageDB           = Nothing
+getFilePath (SpecificPackageDB fp)  = Just fp
+
+getSpecificDBs :: PackageDBStack -> [FilePath]
+getSpecificDBs = catMaybes . fmap getFilePath
+
 
 isCabalDevPresent :: IO Bool
 isCabalDevPresent = do

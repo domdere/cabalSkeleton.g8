@@ -45,6 +45,20 @@ See `cabal build --help` for more build options.
 
     cabal test
 
+### Liquid Haskell
+
+This project has a test-suite target that will verify any [**Liquid Haskell**] [liquid-haskell] type annotations.
+
+This target is disabled by default since **Liquid Haskell** and an SMT solver like `z3` can be a bit of a pain to install.
+
+Instructions for setting up **Liquid Haskell** can be found [**here**] [liquid-haskell-instructions].
+
+The test-suite target can be enable at the configure step with a line like:
+
+```
+cabal configure --enable-tests --flags="liquid-tests"
+```
+
 ## Adding Unit tests
 
 Unit tests are written with [**doctest**] [doctest-github], for instructions on how to add unit tests
@@ -83,7 +97,8 @@ In terms of using it all the commands remain the same, just run `cabal sandbox i
 
 The related `cabal-dev` and `sandbox` artifacts are already contained in the `.gitignore` file.
 
+[cabal-dev]: https://github.com/creswick/cabal-dev "creswick/cabal-dev on GitHub.com"
 [doctest-github]: https://github.com/sol/doctest-haskell "sol/doctest-haskell on GitHub.com"
 [doctest-userguide]: https://github.com/sol/doctest-haskell/blob/master/README.markdown#usage "doctest Usage Guide"
-[cabal-dev]: https://github.com/creswick/cabal-dev "creswick/cabal-dev on GitHub.com"
-
+[liquid-haskell]: http://goto.ucsd.edu/~rjhala/liquid/haskell/blog/about/ "About Liquid Haskell"
+[liquid-haskell-instructions]: http://blog.forgetfulfunctor.com/posts/2014-08-12-installing-liquid-haskell.html "Installing Liquid Haskell"

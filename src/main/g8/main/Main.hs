@@ -26,18 +26,18 @@ import System.Environment ( getArgs )
 versionString :: String
 versionString = "$executable_name;format="camel"$: $version_string$"
 
-data Command = Version  deriving (Show, Eq)
+data Command = Version | ExampleCommand deriving (Show, Eq)
 
-foldCommand :: a -> Command -> a
-foldCommand v c = case c of
-    Version -> v
+foldCommand :: a -> a -> Command -> a
+foldCommand v e c = case c of
+    Version         -> v
+    ExampleCommand  -> e
 
 commandParser :: Parser Command
 commandParser =
         flag' Version (short 'v' <> long "version" <> help "version info.")
     <|> (subparser \$
-            command' "init" "Initialise the bolton store" (pure Init)
-        <>  command' "list" "List the installed apps" (pure List)
+            command' "example" "Example Description" (pure ExampleCommand)
     )
 
 command' :: String -> String -> Parser a -> Mod CommandFields a
@@ -53,7 +53,7 @@ parseAndRun p f = do
         _   -> execParser (info (p <**> helper) mempty) >>= f
 
 runCommand :: Command -> IO ()
-runCommand = foldCommand printVersion (pure ()) (pure ())
+runCommand = foldCommand printVersion (pure ())
 
 printVersion :: IO ()
 printVersion = putStrLn versionString

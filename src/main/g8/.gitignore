@@ -10,10 +10,6 @@
 # Python compiled bytecode
 *.pyc
 
-# potential build files:
-data/
-*.buildinfo
-
 #cabal-dev build directory:
 cabal-dev/
 

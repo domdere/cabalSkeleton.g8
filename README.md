@@ -2,8 +2,6 @@
 
 An empty **Haskell** project using **cabal**.  Handy for projects that only involve **Haskell**, with maybe a little bit of **C**.
 
-forked from [**domdere/cabalSkeleton.g8**] [cabal-skeleton]
-
 Includes a default test suite that uses [**doctest**] [doctest-github]
 
 # Giter8

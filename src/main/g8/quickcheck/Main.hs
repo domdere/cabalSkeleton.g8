@@ -6,6 +6,6 @@ import System.Exit
 import System.IO
 
 main :: IO ()
-main = hSetBuffering stdout LineBuffering >> mapM id
+main = hSetBuffering stdout LineBuffering >> sequence
     [
-    ] >>= \rs -> when (not . all id \$ rs) exitFailure
+    ] >>= \rs -> unless (and rs) exitFailure

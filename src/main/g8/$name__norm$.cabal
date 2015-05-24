@@ -51,8 +51,6 @@ executable              $executable_name$
                         -fno-warn-unused-binds
                         -fno-warn-unused-do-bind
                         -fno-warn-type-defaults
-                        -- -i.:..
-                        -optl-Wl,-rpath,\$ORIGIN
     --extra-libraries:
     --extra-lib-dirs:
     -- Modules included in this executable, other than Main.
@@ -94,7 +92,7 @@ test-suite              quickcheck
     main-is:            Main.hs
     hs-source-dirs:     quickcheck
     build-depends:      base                >= 4 && < 5
-                    ,   QuickCheck          == 2.7.6
+                    ,   QuickCheck          == 2.8.*
                     ,   $name;format="norm"$
 
 
@@ -104,7 +102,7 @@ test-suite              hlint
     main-is:            Main.hs
     hs-source-dirs:     hlint
     build-depends:      base
-                    ,   hlint               == 1.8.*
+                    ,   hlint               == 1.9.*
 
 benchmark               benchmarks
     default-language:   Haskell2010

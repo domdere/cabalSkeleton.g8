@@ -30,10 +30,6 @@ library
                     ,   array
 
     ghc-options:        -Wall
-                        -fno-warn-unused-imports
-                        -fno-warn-unused-binds
-                        -fno-warn-unused-do-bind
-                        -fno-warn-type-defaults
 
     hs-source-dirs:     src
 
@@ -47,10 +43,7 @@ executable              $executable_name$
     main-is:            Main.hs
 
     ghc-options:        -Wall
-                        -fno-warn-unused-imports
-                        -fno-warn-unused-binds
-                        -fno-warn-unused-do-bind
-                        -fno-warn-type-defaults
+
     --extra-libraries:
     --extra-lib-dirs:
     -- Modules included in this executable, other than Main.

@@ -1,11 +1,17 @@
 #!/usr/bin/env runhaskell
 {-# OPTIONS_GHC -Wall #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 module Main (main) where
 
-import Data.List ( nub )
-import Data.Maybe ( catMaybes )
+import Control.Applicative ( Applicative(..) )
+import Control.Monad ( Monad(..) )
+import Data.Bool ( Bool(..) )
+import Data.Functor ( Functor(..), (<$>) )
+import Data.List ( (++), elem, last, nub, unlines, words )
+import Data.Maybe ( Maybe(..), catMaybes )
+import Data.String ( String )
+import Data.Tuple ( snd )
 import Data.Version ( showVersion )
-import Control.Applicative
 import Distribution.Package ( PackageName(PackageName), PackageId, InstalledPackageId, packageVersion, packageName )
 import Distribution.PackageDescription ( PackageDescription(), TestSuite(..) )
 import Distribution.Simple ( defaultMainWithHooks, UserHooks(..), simpleUserHooks )
@@ -17,7 +23,10 @@ import Distribution.Simple.LocalBuildInfo ( withLibLBI, withPackageDB, withTestL
 import Distribution.Verbosity ( Verbosity )
 import Distribution.Version ( Version )
 import System.Directory ( getDirectoryContents )
-import System.FilePath ( (</>) )
+import System.FilePath ( FilePath, (</>) )
+import System.IO ( IO )
+
+import Prelude ( Show(..), ($), (.) )
 
 main :: IO ()
 main = defaultMainWithHooks simpleUserHooks
@@ -46,7 +55,7 @@ generateBuildModule verbosity pkg lbi = do
                 ,   "specificPackageDBs = " ++ show (getSpecificDBs (withPackageDB lbi))
                 ]
     where
-        formatdeps = map (formatone . snd)
+        formatdeps = fmap (formatone . snd)
         formatone p = case packageName p of
             PackageName n -> n ++ "-" ++ showVersion (packageVersion p)
 
